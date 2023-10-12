@@ -17,6 +17,49 @@ function PhoneDetails([phonesList]) {
 
     const getPhoneDetails = async () => {
         setFetchingDetails(true);
-        
+
+        const phoneToRender = phonesList.find(eachPhone => eachPhone.id === Number(phoneId));
+
+        setTimeout(() => {
+            if (!phoneToRender) {
+                navigate("/not-found");
+                return;
+            }
+            setPhoneDetails(phoneToRender);
+            setFetchingDetails(false);
+        }, 500);
+
+    };
+
+    if (fetchingDetails) {
+        return  <Spinner animation="border" variant="info"/>   
     }
+
+    const {
+        name,
+        manufacturer,
+        description,
+        color,
+        price,
+        screen,
+        processor,
+        ram,
+        imageFileName
+    } = phoneDetails;
+
+    return (
+        <Card>{name}
+        {manufacturer}
+        {description}
+        {color}
+        {price}
+        {screen}
+        {processor}
+        {ram}
+        {imageFileName}</Card>
+    )
+
+
+
+
 }
